@@ -250,9 +250,9 @@ func (h *DisaggProfileHandler) Pick(ctx context.Context, _ *scheduling.CycleStat
 	}
 
 	if request.TargetModel != "" {
-		span.SetAttributes(attribute.String("gen_ai.request.model", request.TargetModel))
+		span.SetAttributes(telemetry.GenAIRequestModel(request.TargetModel))
 	}
-	span.SetAttributes(attribute.String("gen_ai.request.id", request.RequestId))
+	span.SetAttributes(telemetry.GenAIRequestID(request.RequestId))
 
 	// ── Stage 1: Decode ────────────────────────────────────────────────────
 	if _, executed := profileResults[h.decodeProfile]; !executed {

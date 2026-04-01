@@ -164,10 +164,10 @@ func (h *PdProfileHandler) Pick(ctx context.Context, _ *scheduling.CycleState, r
 	// Set optional request attributes if request is not nil
 	if request != nil {
 		if request.TargetModel != "" {
-			span.SetAttributes(attribute.String("gen_ai.request.model", request.TargetModel))
+			span.SetAttributes(telemetry.GenAIRequestModel(request.TargetModel))
 		}
 		if request.RequestId != "" {
-			span.SetAttributes(attribute.String("gen_ai.request.id", request.RequestId))
+			span.SetAttributes(telemetry.GenAIRequestID(request.RequestId))
 		}
 	}
 

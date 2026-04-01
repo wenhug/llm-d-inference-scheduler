@@ -106,9 +106,9 @@ func (p *DisaggHeadersHandler) PreRequest(ctx context.Context, request *scheduli
 	}
 
 	if request.TargetModel != "" {
-		span.SetAttributes(attribute.String("gen_ai.request.model", request.TargetModel))
+		span.SetAttributes(telemetry.GenAIRequestModel(request.TargetModel))
 	}
-	span.SetAttributes(attribute.String("gen_ai.request.id", request.RequestId))
+	span.SetAttributes(telemetry.GenAIRequestID(request.RequestId))
 
 	// Prefill header
 	delete(request.Headers, common.PrefillEndpointHeader) // clear header, if already set
